@@ -1,5 +1,7 @@
+from DecisionTree import DecisionTree
+
 def main():
-    print("Materials list")
+    tree = DecisionTree()
 
 if __name__ == "__main__":
     main()
