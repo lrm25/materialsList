@@ -30,7 +30,12 @@ def create_tree():
     tree_name = input("Enter tree name: ")
     tree = DecisionTree(tree_name)
     print("Created new tree with name " + tree.name)
+    existing_trees[str(len(existing_trees) + 1)] = tree.name
         
+def generate_list():
+    for tree in existing_trees:
+        print(tree + ". " + existing_trees[tree])
+    selected_tree = input("Select tree: ")
 
 def main_loop():
     option_selected = False
@@ -42,7 +47,9 @@ def main_loop():
             print("Invalid selection")
         else:
             option_selected = True
-    if selected_option == '2':
+    if selected_option == '1':
+        generate_list()
+    elif selected_option == '2':
         create_edit_tree()
     elif selected_option == '4':
         quit()
