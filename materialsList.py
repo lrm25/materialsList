@@ -11,17 +11,23 @@ def main():
     while True:
         main_loop()
 
-def create_edit_tree():
+def select_option(option_dict, input_str, acceptable = ()):
     option_selected = False
-    for option in existing_trees:
-        print(option + ". " + existing_trees[option])
+    for option in option_dict:
+        print(option + ". " + option_dict[option])
     while not option_selected:
-        selected_option = input("Select tree, or (c)reate new:  ")
-        if selected_option.lower() != 'c' and \
-           not selected_option in existing_trees:
+        selected_option = input(input_str)
+        if not selected_option in acceptable and \
+           not selected_option in option_dict:
             print("Invalid selection")
         else:
             option_selected = True
+    return selected_option
+
+def create_edit_tree():
+    selected_option = select_option(existing_trees,
+                                    "Select tree, or (c)reate new: ",
+                                    ('c', 'C'))
     if selected_option.lower() == 'c':
         create_tree()
 
@@ -38,15 +44,7 @@ def generate_list():
     selected_tree = input("Select tree: ")
 
 def main_loop():
-    option_selected = False
-    for option in main_options:
-        print(option + ". " + main_options[option])
-    while not option_selected:
-        selected_option = input("Enter value: ")
-        if not selected_option in main_options:
-            print("Invalid selection")
-        else:
-            option_selected = True
+    selected_option = select_option(main_options, "Enter value: ")
     if selected_option == '1':
         generate_list()
     elif selected_option == '2':
