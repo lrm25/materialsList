@@ -26,9 +26,6 @@ def retrieveAll(dbpath="materialsList.db"):
 
 class DecisionTree:
 
-    def __init__(self, name):
-        self.name = name
-
     def __init__(self, name, tree_id=0):
         self.id = tree_id
         self.name = name
