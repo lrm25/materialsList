@@ -1,11 +1,11 @@
-from DecisionTree import DecisionTree
+import sqlite3
+
+from DecisionTree import DecisionTree, retrieveAll
 
 main_options = { "1" : "Generate materials list", \
                  "2" : "Create/edit tree", \
                  "3" : "Backup", \
                  "4" : "Quit" }
-
-existing_trees = { "1" : "Sample" }
 
 def main():
     while True:
@@ -25,7 +25,18 @@ def select_option(option_dict, input_str, acceptable = ()):
     return selected_option
 
 def create_edit_tree():
-    selected_option = select_option(existing_trees,
+    conn = sqlite3.connect("materialsList.db")
+    c = conn.cursor()
+    c.execute("SELECT name FROM sqlite_master WHERE type='table' AND \
+              name='tree'")
+    if (c.fetchone() is None):
+        c.execute('''CREATE TABLE tree (id int, name text)''')
+    c.execute('SELECT * FROM tree')
+    if (c.fetchone() is None):
+        sample_tree = DecisionTree('Sample')
+        sample_tree.store()
+    c.close()
+    selected_option = select_option(retrieveAll(),
                                     "Select tree, or (c)reate new: ",
                                     ('c', 'C'))
     if selected_option.lower() == 'c':
@@ -36,11 +47,12 @@ def create_tree():
     tree_name = input("Enter tree name: ")
     tree = DecisionTree(tree_name)
     print("Created new tree with name " + tree.name)
-    existing_trees[str(len(existing_trees) + 1)] = tree.name
+    tree.store()
         
 def generate_list():
-    for tree in existing_trees:
-        print(tree + ". " + existing_trees[tree])
+    trees = retrieveAll()
+    for tree_id in trees:
+        print(str(tree_id) + ". " + trees[tree_id])
     selected_tree = input("Select tree: ")
 
 def main_loop():
