@@ -1,6 +1,6 @@
 import sqlite3
 
-from DecisionTree import DecisionTree, retrieveAll
+from decision_tree import DecisionTree, retrieveAll
 
 main_options = { "1" : "Generate materials list", \
                  "2" : "Create/edit tree", \
