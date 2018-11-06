@@ -1,5 +1,7 @@
 import sqlite3
 
+EMPTY_OPTION_DICT="Options dictionary is empty"
+
 from decision_tree import DecisionTree, retrieveAll
 
 main_options = { "1" : "Generate materials list", \
@@ -12,6 +14,9 @@ def main():
         main_loop()
 
 def select_option(option_dict, input_str, acceptable = ()):
+
+    if option_dict is None or len(option_dict) is 0: 
+        raise Exception(EMPTY_OPTION_DICT)
     option_selected = False
     for option in option_dict:
         print(option + ". " + option_dict[option])
