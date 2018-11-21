@@ -7,7 +7,6 @@ import materials_list
 
 def test_select_option_1():
     with pytest.raises(Exception) as excinfo:
-        # No options
         option_dict = {}
         input_str = ""
         materials_list.select_option(option_dict, input_str)
@@ -15,7 +14,6 @@ def test_select_option_1():
 
 def test_select_option_2():
     with pytest.raises(Exception) as excinfo:
-        # No options
         option_dict = None
         input_str = ""
         materials_list.select_option(option_dict, input_str)

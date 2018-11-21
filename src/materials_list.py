@@ -57,9 +57,9 @@ def create_edit_tree():
         sample_tree.store()
     c.close()
     selected_option = select_option(retrieveAll(),
-                                    "Select tree, or (c)reate new: ",
-                                    ('c', 'C'))
-    if selected_option.lower() == 'c':
+                                    "Select tree, create (n)ew, or (c)ancel: ",
+                                    ('c', 'C', 'n', 'N'))
+    if selected_option.lower() == 'n':
         create_tree()
 
 def create_tree():
@@ -71,9 +71,11 @@ def create_tree():
         
 def generate_list():
     trees = retrieveAll()
-    for tree_id in trees:
-        print(str(tree_id) + ". " + trees[tree_id])
-    selected_tree = input("Select tree: ")
+    #for tree_id in trees:
+    #    print(str(tree_id) + ". " + trees[tree_id])
+    #selected_tree = input("Select tree: ")
+    selected_tree = select_option(trees, "Select tree or (c)ancel: ", \
+                                  {'C', 'c'})
 
 def main_loop():
     selected_option = select_option(main_options, "Enter value: ")
