@@ -2,6 +2,7 @@ import sqlite3
 
 from menu import *
 from decision_tree import DecisionTree, retrieveAll
+from tool_menu import ToolMenu
 
 GEN_LIST = "1"
 GEN_LIST_TEXT = "Generate materials list"
@@ -34,6 +35,9 @@ class MainMenu(Menu):
             self.generate_list()
         elif selected_option == CE_TREE:
             self.create_edit_tree()
+        elif selected_option == TOOL_EDIT:
+            tool_menu = ToolMenu()
+            tool_menu.display()
         elif selected_option == QUIT:
             quit()
         else:
@@ -45,7 +49,7 @@ class MainMenu(Menu):
         c.execute("SELECT name FROM sqlite_master WHERE type='table' AND \
                   name='tree'")
         if (c.fetchone() is None):
-            c.execute('''CREATE TABLE tree (id int, name text)''')
+            c.execute('''CREATE TABLE tree (id int, name text NOT NULL)''')
         c.execute('SELECT * FROM tree')
         if (c.fetchone() is None):
             sample_tree = DecisionTree('Sample')

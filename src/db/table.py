@@ -4,7 +4,7 @@ class Table:
         self.name = name
         self.db = db
 
-    def exists(self):
+    #def exists(self):
 
-    def create(self):
+    #def create(self):
         

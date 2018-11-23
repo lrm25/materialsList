@@ -4,22 +4,23 @@ class ToolList:
         self.table = table
 
     def add(self, name):
-        if table.itemExists(name):
+        if self.table.item_exists(name):
             print("Tool "+name+" already exists")
-        else
-            table.add_item(name)
+        else:
+            self.table.add_item(name)
 
     def get_all(self):
+        return self.table.get_all()
 
     def change_name(self, old_name, new_name):
-        if not table.itemExists(old_name):
+        if not self.table.item_exists(old_name):
             print("No tool named "+name+" in table")
-        else
-            table.edit_item(old_name, new_name)
+        else:
+            self.table.edit_item(old_name, new_name)
 
     def delete(self, name):
-        if not table.itemExists(name):
+        if not self.table.item_exists(name):
             print("No tool named "+name+" in table")
-        else
-            table.delete_item(name)
+        else:
+            self.table.delete_item(name)
             
