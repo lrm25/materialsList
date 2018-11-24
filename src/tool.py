@@ -9,6 +9,9 @@ class ToolList:
         else:
             self.table.add_item(name)
 
+    def get(self, name):
+        return self.table.get_item(name)
+
     def get_all(self):
         return self.table.get_all()
 

@@ -44,13 +44,15 @@ class ToolsTable(Table):
 
     def edit_item(self, old_name, new_name):
         c = self.db.connect()
-        c.execute("UPDATE tools SET (name=?) WHERE name=?", (old_name,),
-                  (new_name,))
+        c.execute('''UPDATE tools SET name=? WHERE name=?''', 
+                  (new_name, old_name))
+        self.db.commit()
         c.close()
 
     def delete_item(self, name):
         c = self.db.connect()
         c.execute("DELETE FROM tools WHERE name=?", (name,))
+        self.db.commit()
         c.close()
 
     def item_exists(self, name):
